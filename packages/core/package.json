@@ -1,0 +1,15 @@
+{
+  "name": "@plds/core",
+  "version": "0.0.0",
+  "main": "index.js",
+  "license": "ISC",
+  "scripts": {},
+  "publishConfig": {
+    "access": "public"
+  },
+  "devDependencies": {
+    "autoprefixer": "^10.4.14",
+    "postcss": "^8.4.25",
+    "tailwindcss": "^3.3.2"
+  }
+}
