@@ -1,7 +1,7 @@
 export default {
-  extends: ["next", "turbo", "prettier"],
+  extends: ['next', 'turbo', 'prettier'],
   rules: {
-    "@next/next/no-html-link-for-pages": "off",
+    '@next/next/no-html-link-for-pages': 'off',
     'react-refresh/only-export-components': 'warn',
     'react/jsx-no-target-blank': [
       0,
@@ -12,7 +12,7 @@ export default {
   },
   parserOptions: {
     babelOptions: {
-      presets: [require.resolve("next/babel")],
+      presets: [require.resolve('next/babel')],
     },
   },
-};
+}
