@@ -1,0 +1,16 @@
+{
+  "name": "@plds/core",
+  "version": "1.0.0",
+  "license": "MIT",
+  "main": "tailwind.config.js",
+  "scripts": {
+    "lint": "eslint \"**/*.ts*\""
+  },
+  "keywords": [],
+  "devDependencies": {
+    "@tailwindcss/typography": "^0.5.9",
+    "eslint-config-plds": "workspace:*",
+    "tailwindcss": "^3.3.2",
+    "tsconfig": "workspace:*"
+  }
+}

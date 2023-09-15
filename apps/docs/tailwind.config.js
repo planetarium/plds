@@ -1,6 +1,7 @@
 /** @type {import('tailwindcss').Config} */
+import config from '@plds/core'
 
-module.exports = {
+export default {
   content: [
     './app/**/*.{js,ts,jsx,tsx}',
     './components/**/*.{js,ts,jsx,tsx}',
@@ -10,4 +11,5 @@ module.exports = {
     extend: {},
   },
   plugins: [],
+  presets: [config],
 }

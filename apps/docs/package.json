@@ -9,18 +9,21 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@plds/core": "workspace:^",
     "@plds/ui": "workspace:*",
     "next": "^13.4.1",
     "react": "^18.2.0",
     "react-dom": "^18.2.0"
   },
   "devDependencies": {
+    "@tailwindcss/aspect-ratio": "^0.4.2",
+    "@tailwindcss/container-queries": "^0.1.1",
+    "@tailwindcss/forms": "^0.5.4",
+    "@tailwindcss/typography": "^0.5.9",
     "@types/node": "^17.0.12",
     "@types/react": "^18.0.22",
     "@types/react-dom": "^18.0.7",
-    "autoprefixer": "^10.4.14",
     "eslint-config-plds": "workspace:*",
-    "postcss": "^8.4.25",
     "tailwindcss": "^3.3.2",
     "tsconfig": "workspace:*",
     "typescript": "^4.5.3"

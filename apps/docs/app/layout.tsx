@@ -1,4 +1,4 @@
-import '@plds/ui/global.css'
+import '../global.css'
 
 export default function RootLayout({
   children,
