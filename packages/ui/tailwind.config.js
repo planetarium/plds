@@ -2,7 +2,6 @@
 const preset = require('@plds/core')
 
 module.exports = {
-  content: ['./**/*.{js,ts,jsx,tsx}'],
-  plugins: [],
   presets: [preset],
+  content: ['./**/*.{js,jsx,tsx}'],
 }

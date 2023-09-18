@@ -1,5 +1,5 @@
 module.exports = {
-  transpilePackages: ['@plds/ui'],
+  transpilePackages: ['@plds/core, @plds/ui'],
   experimental: {
     appDir: true,
   },

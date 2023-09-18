@@ -5,19 +5,12 @@ const shadow = require('./shadow')
 const typography = require('./typography')
 
 module.exports = {
-  content: [
-    '../../apps/**/*.{js,ts,jsx,tsx}',
-    '../../packages/**/*.{js,ts,jsx,tsx}',
-    './**/*.{js,ts,jsx,tsx}',
-    '../**/*.{js,ts,jsx,tsx}',
-  ],
   theme: {
     extend: {
-      colors,
-      screens,
+      colors: colors,
+      screens: screens,
       boxShadow: shadow,
       ...typography,
     },
   },
-  plugins: [],
 }
