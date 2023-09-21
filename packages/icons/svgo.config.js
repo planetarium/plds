@@ -12,5 +12,17 @@ module.exports = {
     'removeScriptElement',
     'removeDoctype',
     'removeEmptyText',
+    {
+      name: 'removeElementsByAttr',
+      params: {
+        id: 'a',
+      },
+    },
+    {
+      name: 'removeAttrs',
+      params: {
+        attrs: 'mask',
+      },
+    },
   ],
 }
