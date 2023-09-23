@@ -1,72 +1,14 @@
+const { pascalCase } = require('change-case')
 const fs = require('fs/promises')
 const { rimraf } = require('rimraf')
-const { transform } = require('@svgr/core')
-const _camelcase = import('camelcase')
 const babel = require('@babel/core')
-const jsx = require('@svgr/plugin-jsx')
-const svgo = require('@svgr/plugin-svgo')
-const prettier = require('@svgr/plugin-prettier')
+const formatter = require('../helpers')
 
 const outputPath = './dist'
 
-async function transformSVGtoJSX(file, componentName, format) {
-  const content = await fs.readFile(`./optimized/${file}`, 'utf-8')
-  const svgReactContent = await transform(
-    content,
-    {
-      replaceAttrValues: { '#00497A': 'currentColor' },
-      plugins: [svgo, jsx, prettier],
-    },
-    {
-      componentName,
-    }
-  )
-
-  const { code } = await babel.transformAsync(svgReactContent, {
-    presets: [
-      [
-        '@babel/preset-react',
-        {
-          throwIfNamespace: false, // defaults to true
-        },
-      ],
-    ],
-    minified: true,
-  })
-
-  if (format === 'esm') {
-    return code
-  }
-
-  const replaceESM = code
-    .replace(
-      'import * as React from "react";',
-      'const React = require("react");'
-    )
-    .replace('export default', 'module.exports =')
-  return replaceESM
-}
-
-async function indexFileContent(files, format, includeExtension = true) {
-  let content = ''
-  const extension = includeExtension ? '.js' : ''
-  const camelcase = (await _camelcase).default
-
-  files.map((fileName) => {
-    const componentName = `${camelcase(fileName.replace(/.svg/, ''), {
-      pascalCase: true,
-    })}Icon`
-    const directoryString = `'./${componentName}${extension}'`
-    content +=
-      format === 'esm'
-        ? `export { default as ${componentName} } from ${directoryString};\n`
-        : `module.exports.${componentName} = require(${directoryString});\n`
-  })
-  return content
-}
-
-async function buildIcons(format = 'esm') {
+async function mergeIconsToJSX(format) {
   let outDir = outputPath
+
   if (format === 'esm') {
     outDir = `${outputPath}/esm`
   } else {
@@ -77,40 +19,97 @@ async function buildIcons(format = 'esm') {
 
   const files = await fs.readdir('./optimized', 'utf-8')
 
-  await Promise.all(
-    files.flatMap(async (fileName) => {
-      const camelcase = (await _camelcase).default
-      const componentName = `${camelcase(fileName.replace(/.svg/, ''), {
-        pascalCase: true,
-      })}Icon`
-      const content = await transformSVGtoJSX(fileName, componentName, format)
-      const types = `import * as React from 'react';\ndeclare function ${componentName}(props: React.SVGProps<SVGSVGElement>): JSX.Element;\nexport default ${componentName};\n`
+  const iconTypes = [
+    ...new Set(
+      files.map((fileName) => {
+        return `${pascalCase(
+          fileName.replace(/.svg/, '').replace(/[0-9]/g, '')
+        )}`
+      })
+    ),
+  ]
 
-      // console.log(`- Creating file: ${componentName}.js`);
-      await fs.writeFile(`${outDir}/${componentName}.js`, content, 'utf-8')
-      await fs.writeFile(`${outDir}/${componentName}.d.ts`, types, 'utf-8')
+  for (const icon of iconTypes) {
+    const content = `
+      import * as React from "react";
+
+      import Icon12 from '../../src/${format}/${icon}12Icon';
+      import Icon16 from '../../src/${format}/${icon}16Icon';
+      import Icon24 from '../../src/${format}/${icon}24Icon';
+      import Icon32 from '../../src/${format}/${icon}32Icon';
+      import Icon40 from '../../src/${format}/${icon}40Icon';
+      
+      const ${icon}Icon = ({ size, ...props }) => {
+        switch (size) {
+          case 12:
+            return <Icon12 {...props} />;
+          case 16:
+            return <Icon16 {...props} />;
+          case 24:
+            return <Icon24 {...props} />;
+          case 32:
+            return <Icon32 {...props} />;
+          case 40:
+            return <Icon40 {...props} />;
+          default:
+            return null;
+        }
+      };
+
+      export default ${icon}Icon;
+    `
+
+    const { code } = await babel.transformAsync(content, {
+      presets: [
+        [
+          '@babel/preset-react',
+          {
+            throwIfNamespace: false,
+          },
+        ],
+      ],
+      minified: true,
     })
-  )
+
+    const result = formatter(format, code)
+
+    const types = `
+      import * as React from 'react';
+      declare function ${icon}Icon(props: React.SVGProps<SVGSVGElement> & {
+        size: 12 | 16 | 24 | 32 | 40
+      }): JSX.Element;
+      export default ${icon}Icon;
+    `
+
+    await fs.writeFile(`${outDir}/${icon}Icon.js`, result, 'utf-8')
+    await fs.writeFile(`${outDir}/${icon}Icon.d.ts`, types, 'utf-8')
+  }
 
   console.log('- Creating file: index.js')
 
-  const svgFiles = await indexFileContent(files, format)
+  const svgFiles = await indexFileContent(iconTypes, format)
 
-  await fs.writeFile(
-    `${outDir}/index.js`,
-    // indexFileContent(files, format),
-    svgFiles,
-    'utf-8'
-  )
+  await fs.writeFile(`${outDir}/index.js`, svgFiles, 'utf-8')
 
-  const svgEsmFiles = await indexFileContent(files, 'esm', false)
+  const svgEsmFiles = await indexFileContent(iconTypes, 'esm', false)
 
-  await fs.writeFile(
-    `${outDir}/index.d.ts`,
-    // indexFileContent(files, 'esm', false),
-    svgEsmFiles,
-    'utf-8'
-  )
+  await fs.writeFile(`${outDir}/index.d.ts`, svgEsmFiles, 'utf-8')
+}
+
+async function indexFileContent(files, format, includeExtension = true) {
+  let content = ''
+  const extension = includeExtension ? '.js' : ''
+
+  files.map((fileName) => {
+    const componentName = `${pascalCase(fileName.replace(/.svg/, ''))}Icon`
+    const directoryString = `'./${componentName}${extension}'`
+    content +=
+      format === 'esm'
+        ? `export { default as ${componentName} } from ${directoryString};\n`
+        : `module.exports.${componentName} = require(${directoryString});\n`
+  })
+
+  return content
 }
 
 ;(function main() {
@@ -118,6 +117,6 @@ async function buildIcons(format = 'esm') {
   new Promise((resolve) => {
     resolve(rimraf(`${outputPath}/*`))
   })
-    .then(() => Promise.all([buildIcons('cjs'), buildIcons('esm')]))
+    .then(() => Promise.all([mergeIconsToJSX('cjs'), mergeIconsToJSX('esm')]))
     .then(() => console.log('✅ Finished building package.'))
 })()
