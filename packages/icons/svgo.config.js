@@ -5,10 +5,17 @@ module.exports = {
     pretty: true,
   },
   plugins: [
-    { name: 'preset-default' },
+    {
+      name: 'preset-default',
+      params: {
+        overrides: {
+          removeUselessDefs: false,
+          cleanupIds: false,
+          removeViewBox: false,
+        },
+      },
+    },
     'sortAttrs',
-    'removeScriptElement',
-    'removeDimensions',
     'removeScriptElement',
     'removeDoctype',
     'removeEmptyText',
