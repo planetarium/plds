@@ -1,0 +1,29 @@
+{
+  "name": "assets",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "optimize:pl": "rimraf ./optimized/planetarium & svgo -q -p 8 -f ./src/planetarium -o ./optimized/planetarium",
+    "optimize:social": "rimraf ./optimized/social & svgo -q -p 8 -f ./src/social -o ./optimized/social",
+    "optimize": "pnpm run optimize:pl && pnpm run optimize:social",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "@babel/core": "^7.22.20",
+    "@babel/preset-react": "^7.22.15",
+    "@svgr/cli": "^8.1.0",
+    "@svgr/core": "^8.1.0",
+    "@svgr/plugin-jsx": "^8.1.0",
+    "@svgr/plugin-prettier": "^8.1.0",
+    "@svgr/plugin-svgo": "^8.1.0",
+    "change-case": "^4.1.2",
+    "rimraf": "^5.0.1",
+    "svgo": "^3.0.2",
+    "terser": "^5.20.0",
+    "tsconfig": "workspace:*"
+  }
+}
