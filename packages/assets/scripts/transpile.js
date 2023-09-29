@@ -65,7 +65,6 @@ async function transpileIcons(format = 'esm', directory = 'planetarium') {
       const types = `import * as React from 'react';\ndeclare function ${componentName}(props: React.SVGProps<SVGSVGElement>): JSX.Element;\nexport default ${componentName};\n`
 
       await fs.writeFile(`${outDir}/${componentName}.js`, content, 'utf-8')
-      await fs.writeFile(`${outDir}/${componentName}.d.ts`, types, 'utf-8')
     })
   )
 }
@@ -79,8 +78,10 @@ async function transpileIcons(format = 'esm', directory = 'planetarium') {
       Promise.all([
         transpileIcons('cjs'),
         transpileIcons('cjs', 'social'),
+        transpileIcons('cjs', 'token'),
         transpileIcons('esm'),
         transpileIcons('esm', 'social'),
+        transpileIcons('esm', 'token'),
       ])
     )
     .then(() => console.log('✅ Finished transpiling SVG to JSX components.'))
