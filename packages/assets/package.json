@@ -17,7 +17,8 @@
     "build:pl": "node scripts/build-planetarium.js",
     "build:social": "node scripts/build-social.js",
     "build:token": "node scripts/build-token.js",
-    "build": "pnpm optimize && pnpm transpile && pnpm build:pl && pnpm build:social && pnpm build:token",
+    "build:index": "node scripts/build-index.js",
+    "build": "pnpm optimize && pnpm transpile && pnpm build:pl && pnpm build:social && pnpm build:token && pnpm build:index",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],
