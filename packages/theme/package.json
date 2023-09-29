@@ -18,8 +18,8 @@
   },
   "devDependencies": {
     "@types/react": "^18.2.21",
-    "eslint-config-custom": "workspace:^",
-    "tsconfig": "workspace:^",
+    "eslint-config-custom": "workspace:*",
+    "tsconfig": "workspace:*",
     "typescript": "^5.2.2"
   }
 }
