@@ -5,6 +5,7 @@ const babel = require('@babel/core')
 const formatter = require('../helpers')
 
 const outputPath = './dist'
+const outputTypePath = './dist/types'
 
 async function mergeIconsToJSX(format) {
   let outDir = outputPath
@@ -16,6 +17,7 @@ async function mergeIconsToJSX(format) {
   }
 
   await fs.mkdir(outDir, { recursive: true })
+  await fs.mkdir(outputTypePath, { recursive: true })
 
   const files = await fs.readdir('./optimized', 'utf-8')
 
@@ -59,7 +61,7 @@ async function mergeIconsToJSX(format) {
       export default ${icon}Icon;
     `
 
-    const { code } = await babel.transformAsync(content, {
+    const { code: data } = await babel.transformAsync(content, {
       presets: [
         [
           '@babel/preset-react',
@@ -71,8 +73,11 @@ async function mergeIconsToJSX(format) {
       minified: true,
     })
 
-    const result = formatter(format, code)
+    const code = formatter(format, data)
+    await fs.writeFile(`${outDir}/${icon}Icon.js`, code, 'utf-8')
+  }
 
+  for (const icon of iconTypes) {
     const types = `
       import * as React from 'react';
       declare function ${icon}Icon(props: React.SVGProps<SVGSVGElement> & {
@@ -81,18 +86,14 @@ async function mergeIconsToJSX(format) {
       export default ${icon}Icon;
     `
 
-    await fs.writeFile(`${outDir}/${icon}Icon.js`, result, 'utf-8')
-    await fs.writeFile(`${outDir}/${icon}Icon.d.ts`, types, 'utf-8')
+    await fs.writeFile(`${outputTypePath}/${icon}Icon.d.ts`, types, 'utf-8')
   }
 
-  console.log('- Creating file: index.js')
+  console.log('🌈 Creating file: index.js')
 
   const svgFiles = await indexFileContent(iconTypes, format)
-
   await fs.writeFile(`${outDir}/index.js`, svgFiles, 'utf-8')
-
   const svgEsmFiles = await indexFileContent(iconTypes, 'esm', false)
-
   await fs.writeFile(`${outDir}/index.d.ts`, svgEsmFiles, 'utf-8')
 }
 
