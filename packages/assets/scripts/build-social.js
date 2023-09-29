@@ -34,7 +34,6 @@ async function mergeIconsToJSX(format) {
       })
     ),
   ]
-  console.log(111, iconTypes)
 
   for (const icon of iconTypes) {
     const content = `
@@ -87,29 +86,6 @@ async function mergeIconsToJSX(format) {
 
     await fs.writeFile(`${outputTypePath}/${icon}Icon.d.ts`, types, 'utf-8')
   }
-
-  console.log('🌈 Creating file: index.js')
-
-  const svgFiles = await indexFileContent(iconTypes, format)
-  await fs.writeFile(`${outDir}/index.js`, svgFiles, 'utf-8')
-  const svgEsmFiles = await indexFileContent(iconTypes, 'esm', false)
-  await fs.writeFile(`${outDir}/index.d.ts`, svgEsmFiles, 'utf-8')
-}
-
-async function indexFileContent(files, format, includeExtension = true) {
-  let content = ''
-  const extension = includeExtension ? '.js' : ''
-
-  files.map((fileName) => {
-    const componentName = `${pascalCase(fileName.replace(/.svg/, ''))}Icon`
-    const directoryString = `'./${componentName}${extension}'`
-    content +=
-      format === 'esm'
-        ? `export { default as ${componentName} } from ${directoryString};\n`
-        : `module.exports.${componentName} = require(${directoryString});\n`
-  })
-
-  return content
 }
 
 ;(function main() {

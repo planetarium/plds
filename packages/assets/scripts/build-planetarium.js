@@ -18,8 +18,6 @@ async function mergeIconsToJSX(format) {
   await fs.mkdir(outDir, { recursive: true })
   await fs.mkdir(outputTypePath, { recursive: true })
 
-  const files = await fs.readdir('./optimized/planetarium', 'utf-8')
-
   const content = `
     import * as React from "react";
 
