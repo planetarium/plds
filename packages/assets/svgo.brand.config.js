@@ -9,7 +9,9 @@ module.exports = {
       name: 'preset-default',
       params: {
         overrides: {
-          removeViewBox: false,
+          cleanupIds: {
+            minify: false,
+          },
         },
       },
     },
@@ -17,11 +19,6 @@ module.exports = {
     'removeScriptElement',
     'removeDoctype',
     'removeEmptyText',
-    {
-      name: 'removeAttrs',
-      params: {
-        attrs: 'mask',
-      },
-    },
+    'removeDimensions',
   ],
 }
