@@ -9,16 +9,16 @@
   ],
   "types": "./dist/cjs/index.d.ts",
   "scripts": {
-    "optimize:pl": "rimraf ./optimized/planetarium & svgo -q -p 8 --config=svgo.planetarium.config.js -f ./raw/planetarium -o ./optimized/planetarium",
+    "optimize:brand": "rimraf ./optimized/brand & svgo -q -p 8 --config=svgo.brand.config.js -f ./raw/brand -o ./optimized/brand",
     "optimize:social": "rimraf ./optimized/social & svgo -q -p 8 --config=svgo.social.config.js -f ./raw/social -o ./optimized/social",
     "optimize:token": "rimraf ./optimized/token & svgo -q -p 8 --config=svgo.token.config.js -f ./raw/token -o ./optimized/token",
-    "optimize": "pnpm optimize:pl && pnpm optimize:social && pnpm optimize:token",
+    "optimize": "pnpm optimize:brand && pnpm optimize:social && pnpm optimize:token",
     "transpile": "node scripts/transpile.js",
-    "build:pl": "node scripts/build-planetarium.js",
+    "build:brand": "node scripts/build-brand.js",
     "build:social": "node scripts/build-social.js",
     "build:token": "node scripts/build-token.js",
     "build:index": "node scripts/build-index.js",
-    "build": "pnpm optimize && pnpm transpile && pnpm build:pl && pnpm build:social && pnpm build:token && pnpm build:index",
+    "build": "pnpm optimize && pnpm transpile && pnpm build:brand && pnpm build:social && pnpm build:token && pnpm build:index",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],
@@ -34,6 +34,7 @@
     "@svgr/plugin-svgo": "^8.1.0",
     "change-case": "^4.1.2",
     "rimraf": "^5.0.1",
+    "string-hash": "^1.1.3",
     "svgo": "^3.0.2",
     "terser": "^5.20.0",
     "tsconfig": "workspace:*"
