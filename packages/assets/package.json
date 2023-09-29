@@ -4,8 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "optimize:pl": "rimraf ./optimized/planetarium & svgo -q -p 8 -f ./src/planetarium -o ./optimized/planetarium",
-    "optimize:social": "rimraf ./optimized/social & svgo -q -p 8 -f ./src/social -o ./optimized/social",
+    "optimize:pl": "rimraf ./optimized/planetarium & svgo -q -p 8 -f ./raw/planetarium -o ./optimized/planetarium",
+    "optimize:social": "rimraf ./optimized/social & svgo -q -p 8 -f ./raw/social -o ./optimized/social",
     "optimize": "pnpm run optimize:pl && pnpm run optimize:social",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
