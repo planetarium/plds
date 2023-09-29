@@ -16,6 +16,7 @@ async function transformSVGtoJSX(directory, file, componentName, format) {
     content,
     {
       plugins: [svgo, jsx, prettier],
+      svgo: false,
     },
     {
       componentName,
@@ -37,7 +38,7 @@ async function transformSVGtoJSX(directory, file, componentName, format) {
   return formatter(format, code)
 }
 
-async function transpileIcons(format = 'esm', directory = 'planetarium') {
+async function transpileIcons(format = 'esm', directory = 'brand') {
   let outDir = outputPath
 
   if (format === 'esm') {
