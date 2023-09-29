@@ -10,8 +10,8 @@ const formatter = require('../helpers')
 
 const outputPath = './src'
 
-async function transformSVGtoJSX(file, componentName, format) {
-  const content = await fs.readFile(`./optimized/${file}`, 'utf-8')
+async function transformSVGtoJSX(directory, file, componentName, format) {
+  const content = await fs.readFile(`./optimized/${directory}/${file}`, 'utf-8')
   const svgReactContent = await transform(
     content,
     {
@@ -37,7 +37,7 @@ async function transformSVGtoJSX(file, componentName, format) {
   return formatter(format, code)
 }
 
-async function transpileIcons(format = 'esm') {
+async function transpileIcons(format = 'esm', directory = 'planetarium') {
   let outDir = outputPath
 
   if (format === 'esm') {
@@ -48,7 +48,7 @@ async function transpileIcons(format = 'esm') {
 
   await fs.mkdir(outDir, { recursive: true })
 
-  const files = await fs.readdir('./optimized', 'utf-8')
+  const files = await fs.readdir(`./optimized/${directory}`, 'utf-8')
 
   await Promise.all(
     files.flatMap(async (fileName) => {
@@ -56,7 +56,12 @@ async function transpileIcons(format = 'esm') {
         '_',
         ''
       )}Icon`
-      const content = await transformSVGtoJSX(fileName, componentName, format)
+      const content = await transformSVGtoJSX(
+        directory,
+        fileName,
+        componentName,
+        format
+      )
       const types = `import * as React from 'react';\ndeclare function ${componentName}(props: React.SVGProps<SVGSVGElement>): JSX.Element;\nexport default ${componentName};\n`
 
       await fs.writeFile(`${outDir}/${componentName}.js`, content, 'utf-8')
@@ -68,8 +73,15 @@ async function transpileIcons(format = 'esm') {
 ;(function main() {
   console.log('🏗 Transpiling SVG icons...')
   new Promise((resolve) => {
-    resolve(rimraf(`${outputPath}/*`))
+    resolve(rimraf(`${outputPath}/**/*`))
   })
-    .then(() => Promise.all([transpileIcons('cjs'), transpileIcons('esm')]))
+    .then(() =>
+      Promise.all([
+        transpileIcons('cjs'),
+        transpileIcons('cjs', 'social'),
+        transpileIcons('esm'),
+        transpileIcons('esm', 'social'),
+      ])
+    )
     .then(() => console.log('✅ Finished transpiling SVG to JSX components.'))
 })()
