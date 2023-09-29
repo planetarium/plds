@@ -1,4 +1,3 @@
-const { pascalCase } = require('change-case')
 const fs = require('fs/promises')
 const { rimraf } = require('rimraf')
 const babel = require('@babel/core')
@@ -19,17 +18,7 @@ async function mergeIconsToJSX(format) {
   await fs.mkdir(outDir, { recursive: true })
   await fs.mkdir(outputTypePath, { recursive: true })
 
-  const files = await fs.readdir('./optimized', 'utf-8')
-
-  const iconTypes = [
-    ...new Set(
-      files.map((fileName) => {
-        return `${pascalCase(
-          fileName.replace(/.svg/, '').replace(/[0-9]/g, '')
-        )}`
-      })
-    ),
-  ]
+  const iconTypes = ['NCG', 'WNCG']
 
   for (const icon of iconTypes) {
     const content = `
@@ -63,7 +52,7 @@ async function mergeIconsToJSX(format) {
           case 200:
             return <Icon200 {...props} />;
           default:
-            return null;
+            return <Icon24 {...props} />;
         }
       };
 
@@ -90,36 +79,13 @@ async function mergeIconsToJSX(format) {
     const types = `
       import * as React from 'react';
       declare function ${icon}Icon(props: React.SVGProps<SVGSVGElement> & {
-        size: 12 | 16 | 24 | 32 | 40
+        size?: 16 | 24 | 32 | 40 | 48 | 64 | 120 | 160 | 200
       }): JSX.Element;
       export default ${icon}Icon;
     `
 
     await fs.writeFile(`${outputTypePath}/${icon}Icon.d.ts`, types, 'utf-8')
   }
-
-  console.log('🌈 Creating file: index.js')
-
-  const svgFiles = await indexFileContent(iconTypes, format)
-  await fs.writeFile(`${outDir}/index.js`, svgFiles, 'utf-8')
-  const svgEsmFiles = await indexFileContent(iconTypes, 'esm', false)
-  await fs.writeFile(`${outDir}/index.d.ts`, svgEsmFiles, 'utf-8')
-}
-
-async function indexFileContent(files, format, includeExtension = true) {
-  let content = ''
-  const extension = includeExtension ? '.js' : ''
-
-  files.map((fileName) => {
-    const componentName = `${pascalCase(fileName.replace(/.svg/, ''))}Icon`
-    const directoryString = `'./${componentName}${extension}'`
-    content +=
-      format === 'esm'
-        ? `export { default as ${componentName} } from ${directoryString};\n`
-        : `module.exports.${componentName} = require(${directoryString});\n`
-  })
-
-  return content
 }
 
 ;(function main() {
