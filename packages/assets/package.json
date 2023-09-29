@@ -1,12 +1,21 @@
 {
-  "name": "assets",
+  "name": "@plds/assets",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
+  "main": "./dist/cjs/index.js",
+  "module": "./dist/esm/index.js",
+  "files": [
+    "dist"
+  ],
+  "types": "./dist/cjs/index.d.ts",
   "scripts": {
     "optimize:pl": "rimraf ./optimized/planetarium & svgo -q -p 8 -f ./raw/planetarium -o ./optimized/planetarium",
     "optimize:social": "rimraf ./optimized/social & svgo -q -p 8 -f ./raw/social -o ./optimized/social",
     "optimize": "pnpm run optimize:pl && pnpm run optimize:social",
+    "transpile": "node scripts/transpile.js",
+    "build:pl": "node scripts/build-planetarium.js",
+    "build:social": "node scripts/build-social.js",
+    "build": "pnpm run transpile && pnpm run build:pl && pnpm run build:social",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],

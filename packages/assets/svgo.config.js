@@ -9,6 +9,7 @@ module.exports = {
       name: 'preset-default',
       params: {
         overrides: {
+          removeUselessDefs: false,
           removeViewBox: false,
         },
       },
@@ -17,12 +18,6 @@ module.exports = {
     'removeScriptElement',
     'removeDoctype',
     'removeEmptyText',
-    {
-      name: 'removeElementsByAttr',
-      params: {
-        id: 'a',
-      },
-    },
     {
       name: 'removeAttrs',
       params: {
