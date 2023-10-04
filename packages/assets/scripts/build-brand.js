@@ -38,6 +38,7 @@ async function mergeIconsToJSX(format) {
             .replace('symbol', '')
             .replace('vertical', '')
             .replace('wordmark', '')
+            .replace('solid', '')
         )}`
       })
     ),
@@ -48,31 +49,44 @@ async function mergeIconsToJSX(format) {
       import * as React from "react";
 
       import Horizontal from '../../src/${format}/${icon}HorizontalIcon';
+      import HorizontalSolid from '../../src/${format}/${icon}HorizontalSolidIcon';
       ${
         hasMultiline.includes(icon)
-          ? `import Multiline from '../../src/${format}/${icon}MultilineIcon';`
+          ? `
+            import Multiline from '../../src/${format}/${icon}MultilineIcon';
+            import MultilineSolid from '../../src/${format}/${icon}MultilineIcon';
+          `
           : ''
       }
       import Symbol from '../../src/${format}/${icon}SymbolIcon';
+      import SymbolSolid from '../../src/${format}/${icon}SymbolSolidIcon';
       import Vertical from '../../src/${format}/${icon}VerticalIcon';
+      import VerticalSolid from '../../src/${format}/${icon}VerticalSolidIcon';
       import Wordmark from '../../src/${format}/${icon}WordmarkIcon';
+      import WordmarkSolid from '../../src/${format}/${icon}WordmarkSolidIcon';
       
-      const ${icon}Icon = ({ type, theme, style = {}, ...props }) => {
+      const ${icon}Icon = ({ type, theme, style = {}, solid = false, ...props }) => {
         theme = theme ?? 'light'
         const color = theme === 'light' ? '#000' : '#fff'
 
         switch (type) {
           case 'horizontal':
+            if (solid) return <HorizontalSolid {...props} style={{ color, ...style }} />;
             return <Horizontal {...props} style={{ color, ...style }} />;
           case 'multiline':
+            if (solid) return <MultilineSolid {...props} style={{ color, ...style }} />;
             return <Multiline {...props} style={{ color, ...style }} />;
           case 'symbol':
+            if (solid) return <SymbolSolid {...props} style={{ color, ...style }} />;
             return <Symbol {...props} style={{ color, ...style }} />;
           case 'vertical':
+            if (solid) return <VerticalSolid {...props} style={{ color, ...style }} />;
             return <Vertical {...props} style={{ color, ...style }} />;
           case 'wordmark':
+            if (solid) return <WordmarkSolid {...props} style={{ color, ...style }} />;
             return <Wordmark {...props} style={{ color, ...style }} />;
           default:
+            if (solid) return <HorizontalSolid {...props} style={{ color, ...style }} />;
             return <Horizontal {...props} style={{ color, ...style }} />;
         }
       };
@@ -103,6 +117,8 @@ async function mergeIconsToJSX(format) {
         type?: 'horizontal' | 'symbol' | 'vertical' | 'wordmark' ${
           hasMultiline.includes(icon) ? "| 'multiline'" : ''
         }
+        solid?: booleand
+        theme?: 'light' | 'dark'
       }): JSX.Element;
       export default ${icon}Icon;
     `
