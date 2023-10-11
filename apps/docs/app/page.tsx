@@ -10,7 +10,7 @@ import {
   SolariumLabsIcon,
 } from '@plds/assets'
 import { InfoIcon } from '@plds/icons'
-import { Button, Header } from '@plds/ui'
+import { Button, Divider, Header } from '@plds/ui'
 
 export default function Page() {
   return (
@@ -43,7 +43,11 @@ export default function Page() {
           type="vertical"
         />
       </Flex>
-      <hr style={{ margin: '100px 0' }} />
+
+      <Divider />
+      <Divider level={2} />
+      <Divider level={3} my={8} />
+
       <h2>Nine chronicles</h2>
       <Flex>
         <NineCorporationIcon style={{ width: 100, height: 'auto' }} />
