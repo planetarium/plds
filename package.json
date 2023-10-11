@@ -1,4 +1,5 @@
 {
+  "name": "plds",
   "private": true,
   "scripts": {
     "build": "turbo run build",
@@ -9,10 +10,9 @@
   "devDependencies": {
     "@turbo/gen": "^1.9.7",
     "eslint": "^7.32.0",
-    "eslint-config-plds": "workspace:*",
+    "eslint-config-custom": "workspace:*",
     "prettier": "^2.5.1",
     "turbo": "latest"
   },
-  "packageManager": "pnpm@7.15.0",
-  "name": "plds"
+  "packageManager": "pnpm@7.15.0"
 }

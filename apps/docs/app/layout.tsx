@@ -1,3 +1,7 @@
+'use client'
+
+import { PldsProvider } from '@plds/ui'
+
 export default function RootLayout({
   children,
 }: {
@@ -5,7 +9,9 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body>{children}</body>
+      <body>
+        <PldsProvider>{children}</PldsProvider>
+      </body>
     </html>
   )
 }
