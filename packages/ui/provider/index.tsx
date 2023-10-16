@@ -1,3 +1,8 @@
+import '@fontsource/inter/500.css'
+import '@fontsource/inter/700.css'
+import '@fontsource/outfit/500.css'
+import '@fontsource/outfit/700.css'
+
 import { type PropsWithChildren } from 'react'
 import { ChakraBaseProvider } from '@chakra-ui/react'
 import theme from '@plds/theme'

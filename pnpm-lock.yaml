@@ -228,6 +228,12 @@ importers:
       '@emotion/styled':
         specifier: ^11.11.0
         version: 11.11.0(@emotion/react@11.11.1)(@types/react@18.2.22)(react@18.2.0)
+      '@fontsource/inter':
+        specifier: ^5.0.13
+        version: 5.0.13
+      '@fontsource/outfit':
+        specifier: ^5.0.8
+        version: 5.0.8
       '@plds/icons':
         specifier: workspace:*
         version: link:../icons
@@ -242,7 +248,7 @@ importers:
         version: 10.16.4(react-dom@18.2.0)(react@18.2.0)
     devDependencies:
       '@plds/core':
-        specifier: workspace:*
+        specifier: workspace:^
         version: link:../core
       '@types/react':
         specifier: ^18.2.0
@@ -2839,6 +2845,14 @@ packages:
     resolution: {integrity: sha512-1S8uAY/MTJqVx0SC4epBq+N2yhuwtNwLbJYNZyhL2pO1ZVKn5HFXav5T41Ryzy9K9V7ZId2JB2oy/W4aCd9/2w==}
     engines: {node: ^12.22.0 || ^14.17.0 || >=16.0.0}
     dev: true
+
+  /@fontsource/inter@5.0.13:
+    resolution: {integrity: sha512-FVIBhP9X/x02blF2VQl2Pji/c3jUjkWEQ9bom4vIrGwO1MlHRDXhXx9iA1hhjpcCIfH3oX68ihIBdYcFnOXhsg==}
+    dev: false
+
+  /@fontsource/outfit@5.0.8:
+    resolution: {integrity: sha512-1VgGeHc7rdxdtr/r4t5rL8tmMKKgf2bOpucYqFuC8rjNKCAS3mlz4MzEj9rrgRAAdn5yqlKtZOTuu+5P7WQvjw==}
+    dev: false
 
   /@humanwhocodes/config-array@0.11.11:
     resolution: {integrity: sha512-N2brEuAadi0CcdeMXUkhbZB84eskAc8MEX1By6qEchoVywSgXPIjou4rYsl0V3Hj0ZnuGycGCjdNgockbzeWNA==}
