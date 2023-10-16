@@ -115,6 +115,8 @@ const colors = {
   },
   dark: '#121212',
   ncg: '#00b1b1',
+  white: '#fff',
+  black: '#000',
 }
 
 export type Colors = typeof colors

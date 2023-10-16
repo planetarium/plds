@@ -1,6 +1,6 @@
 const fonts = {
-  body: 'Inter',
-  heading: 'Outfit',
+  body: "'Inter', sans-serif",
+  heading: "'Outfit', sans-serif",
 }
 
 export type Fonts = typeof fonts
