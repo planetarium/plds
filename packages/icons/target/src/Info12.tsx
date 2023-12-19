@@ -1,0 +1,2 @@
+import { IconProps, Icon } from "@chakra-ui/icon";
+export const Info12 = (props: IconProps) => <Icon viewBox="0 0 12 12" {...props}><path fill="currentColor" d="M6.75 8.24988c0 .45-.3.75-.75.75s-.75-.3-.75-.75v-2.25c0-.45.3-.75.75-.75s.75.3.75.75v2.25Zm-.75-3.75c-.45 0-.75-.3-.75-.75s.3-.75.75-.75.75.3.75.75-.3.75-.75.75Z" /><path fill="currentColor" d="M6 12c-3.3 0-6-2.7-6-6s2.7-6 6-6 6 2.7 6 6-2.7 6-6 6ZM6 1.5C3.525 1.5 1.5 3.525 1.5 6s2.025 4.5 4.5 4.5 4.5-2.025 4.5-4.5S8.475 1.5 6 1.5Z" /></Icon>;

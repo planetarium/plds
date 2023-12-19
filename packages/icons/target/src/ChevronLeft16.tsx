@@ -1,0 +1,2 @@
+import { IconProps, Icon } from "@chakra-ui/icon";
+export const ChevronLeft16 = (props: IconProps) => <Icon viewBox="0 0 16 16" {...props}><path fill="currentColor" fillRule="evenodd" d="M11.3845 3.46967c-.2929-.29289-.7678-.29289-1.0607 0l-4 4c-.2929.29289-.2929.76777 0 1.06066l4 3.99997c.2929.2929.7678.2929 1.0607 0 .2928-.2929.2928-.7677 0-1.0606L7.91479 8l3.46971-3.46967c.2928-.29289.2928-.76777 0-1.06066Z" clipRule="evenodd" /></Icon>;

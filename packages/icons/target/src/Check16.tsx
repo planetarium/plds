@@ -1,0 +1,2 @@
+import { IconProps, Icon } from "@chakra-ui/icon";
+export const Check16 = (props: IconProps) => <Icon viewBox="0 0 16 16" {...props}><path fill="currentColor" fillRule="evenodd" d="M13.0303 4.80292c.2929.2929.2929.76777 0 1.06066L7.53033 11.3636c-.29289.2929-.76777.2929-1.06066 0l-2.5-2.50002c-.29289-.29289-.29289-.76776 0-1.06066.29289-.29289.76777-.29289 1.06066 0L7 9.77259l4.9697-4.96967c.2929-.29289.7677-.29289 1.0606 0Z" clipRule="evenodd" /></Icon>;

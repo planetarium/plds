@@ -1,0 +1,2 @@
+import { IconProps, Icon } from "@chakra-ui/icon";
+export const Outlink32 = (props: IconProps) => <Icon viewBox="0 0 32 32" {...props}><path fill="currentColor" fillRule="evenodd" d="M22 7.25H10c-.41421 0-.75.33579-.75.75s.33579.75.75.75h10.1893L9.46967 19.4697c-.29289.2929-.29289.7677 0 1.0606.29289.2929.76773.2929 1.06063 0L21.25 9.81066V20c0 .4142.3358.75.75.75s.75-.3358.75-.75V7.99308 8" clipRule="evenodd" /></Icon>;
