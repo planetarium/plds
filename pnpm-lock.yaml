@@ -115,6 +115,7 @@ importers:
       '@svgr/plugin-prettier': ^8.1.0
       '@svgr/plugin-svgo': ^8.1.0
       change-case: ^4.1.2
+      create-chakra-icons: ^1.3.0
       rimraf: ^5.0.1
       svgo: ^3.0.2
       terser: ^5.20.0
@@ -128,6 +129,7 @@ importers:
       '@svgr/plugin-prettier': 8.1.0_@svgr+core@8.1.0
       '@svgr/plugin-svgo': 8.1.0_@svgr+core@8.1.0
       change-case: 4.1.2
+      create-chakra-icons: 1.3.0
       rimraf: 5.0.5
       svgo: 3.1.0
       terser: 5.26.0
@@ -3182,7 +3184,7 @@ packages:
     dependencies:
       '@babel/core': 7.23.6
       '@svgr/babel-preset': 8.1.0_@babel+core@7.23.6
-      '@svgr/core': 8.1.0_typescript@4.9.5
+      '@svgr/core': 8.1.0
       '@svgr/hast-util-to-babel-ast': 8.0.0
       svg-parser: 2.0.4
     transitivePeerDependencies:
@@ -4345,6 +4347,18 @@ packages:
       parse-json: 5.2.0
       path-type: 4.0.0
       typescript: 4.9.5
+    dev: true
+
+  /create-chakra-icons/1.3.0:
+    resolution: {integrity: sha512-ZCZDSJtPuS/MAm019PfHmKlGGhhVxEc1HHSSBsKRnqJ8KK5nPqZhB8KwhB4CI/xMyp4VpARMbNgoS4CnDB6Q7Q==}
+    hasBin: true
+    dependencies:
+      '@babel/generator': 7.23.6
+      '@babel/types': 7.23.6
+      '@svgr/hast-util-to-babel-ast': 8.0.0
+      change-case: 4.1.2
+      minimist: 1.2.8
+      svg-parser: 2.0.4
     dev: true
 
   /create-require/1.1.1:
