@@ -52,4 +52,4 @@ const YourComponent = () => {
 export default YourComponent
 ```
 
-For more in-depth information and detailed documentation on using the Skeleton component, please visit Chakra UI's official website: [Chakra UI Skeleton Documentation](https://chakra-ui.com/docs/components/skeleton).
+For more in-depth information and detailed documentation on using the Tooltip component, please visit Chakra UI's official website: [Chakra UI Tooltip Documentation](https://chakra-ui.com/docs/components/tooltip).
