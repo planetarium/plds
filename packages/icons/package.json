@@ -1,0 +1,34 @@
+{
+  "name": "@plds/icons",
+  "version": "1.0.0",
+  "description": "",
+  "main": "./dist/cjs/index.js",
+  "module": "./dist/esm/index.js",
+  "files": [
+    "dist"
+  ],
+  "types": "./dist/cjs/index.d.ts",
+  "scripts": {
+    "optimize": "rimraf ./optimized & svgo -q -p 8 -f ./raw -o ./optimized",
+    "transpile": "node scripts/transpile.js",
+    "build": "pnpm optimize && pnpm transpile && node scripts/build.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "@babel/core": "^7.22.20",
+    "@babel/preset-react": "^7.22.15",
+    "@svgr/cli": "^8.1.0",
+    "@svgr/core": "^8.1.0",
+    "@svgr/plugin-jsx": "^8.1.0",
+    "@svgr/plugin-prettier": "^8.1.0",
+    "@svgr/plugin-svgo": "^8.1.0",
+    "change-case": "^4.1.2",
+    "rimraf": "^5.0.1",
+    "svgo": "^3.0.2",
+    "terser": "^5.20.0",
+    "tsconfig": "workspace:*"
+  }
+}

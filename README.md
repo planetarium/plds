@@ -1,4 +1,4 @@
-# Turborepo starter
+# Planetarium Design System
 
 This is an official starter Turborepo.
 

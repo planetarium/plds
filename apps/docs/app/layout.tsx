@@ -1,11 +1,17 @@
+'use client'
+
+import { PldsProvider } from '@plds/ui'
+
 export default function RootLayout({
   children,
 }: {
-  children: React.ReactNode;
+  children: React.ReactNode
 }) {
   return (
     <html lang="en">
-      <body>{children}</body>
+      <body>
+        <PldsProvider>{children}</PldsProvider>
+      </body>
     </html>
-  );
+  )
 }
