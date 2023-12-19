@@ -1,40 +1,20 @@
 const { pascalCase } = require('change-case')
 const fs = require('fs/promises')
 const { rimraf } = require('rimraf')
-const babel = require('@babel/core')
-const { transform } = require('@svgr/core')
-const jsx = require('@svgr/plugin-jsx')
-const prettier = require('@svgr/plugin-prettier')
-const svgo = require('@svgr/plugin-svgo')
-const formatter = require('../helpers')
+const { cli } = require('create-chakra-icons')
 
 const outputPath = './src'
 
-async function transformSVGtoJSX(file, componentName, format) {
-  const content = await fs.readFile(`./optimized/${file}`, 'utf-8')
-  const svgReactContent = await transform(
-    content,
-    {
-      plugins: [svgo, jsx, prettier],
-    },
-    {
-      componentName,
-    }
-  )
+async function transformSVGtoJSX(file, componentName, outDir) {
 
-  const { code } = await babel.transformAsync(svgReactContent, {
-    presets: [
-      [
-        '@babel/preset-react',
-        {
-          throwIfNamespace: false,
-        },
-      ],
-    ],
-    minified: true,
+  cli.main({
+    name: file,
+    input: `./optimized/${file}`,
+    output: `${outDir}/${componentName}.tsx`,
+    typescript: true,
+    T: 'C',
+    useFilename: true,
   })
-
-  return formatter(format, code)
 }
 
 async function transpileIcons(format = 'esm') {
@@ -56,10 +36,9 @@ async function transpileIcons(format = 'esm') {
         '_',
         ''
       )}Icon`
-      const content = await transformSVGtoJSX(fileName, componentName, format)
-      const types = `import * as React from 'react';\ndeclare function ${componentName}(props: React.SVGProps<SVGSVGElement>): JSX.Element;\nexport default ${componentName};\n`
+      await transformSVGtoJSX(fileName, componentName, outDir)
+      const types = `import * from 'react/jsx-runtime';\nimport { IconProps, Icon } from "@chakra-ui/icon";\ndeclare function ${componentName}(props: IconProps & { size: 12 | 16 | 24 | 32 | 40 }): ;\nexport default ${componentName};\n`
 
-      await fs.writeFile(`${outDir}/${componentName}.js`, content, 'utf-8')
       await fs.writeFile(`${outDir}/${componentName}.d.ts`, types, 'utf-8')
     })
   )

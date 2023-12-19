@@ -79,8 +79,8 @@ async function mergeIconsToJSX(format) {
 
   for (const icon of iconTypes) {
     const types = `
-      import * as React from 'react';
-      declare function ${icon}Icon(props: React.SVGProps<SVGSVGElement> & {
+      import { IconProps, Icon } from "@chakra-ui/icon";
+      declare function ${icon}Icon(props: IconProps & {
         size: 12 | 16 | 24 | 32 | 40
       }): JSX.Element;
       export default ${icon}Icon;
