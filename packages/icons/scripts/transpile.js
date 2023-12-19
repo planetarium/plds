@@ -8,7 +8,7 @@ const outputPath = './src'
 async function transformSVGtoJSX(file, componentName, outDir) {
 
   cli.main({
-    name: file,
+    name: componentName,
     input: `./optimized/${file}`,
     output: `${outDir}/${componentName}.tsx`,
     typescript: true,
