@@ -13,7 +13,7 @@ async function transformSVGtoJSX(file, componentName, outDir) {
     output: `${outDir}/${componentName}.tsx`,
     typescript: true,
     T: 'C',
-    useFilename: true,
+    useFilename: false,
   })
 }
 
