@@ -33,7 +33,7 @@ async function mergeIconsToJSX(format) {
 
   for (const icon of iconTypes) {
     const content = `
-      import * as React from "react";
+import * as React from "react";
 
       import Icon12 from '../../src/${format}/${icon}12Icon';
       import Icon16 from '../../src/${format}/${icon}16Icon';
@@ -104,10 +104,14 @@ async function indexFileContent(files, format, includeExtension = true) {
   files.map((fileName) => {
     const componentName = `${pascalCase(fileName.replace(/.svg/, ''))}Icon`
     const directoryString = `'./${componentName}${extension}'`
+    const propsType =
+      format === 'esm'
+        ? 'IconProps'
+        : 'IconProps & { size: 12 | 16 | 24 | 32 | 40 }'
     content +=
       format === 'esm'
         ? `export { default as ${componentName} } from ${directoryString};\n`
-        : `module.exports.${componentName} = require(${directoryString});\n`
+        : `declare function ${componentName}(props: ${propsType}): JSX.Element;\n`
   })
 
   return content
