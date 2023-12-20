@@ -1,8 +1,8 @@
 const Button = {
   sizes: {
-    sm:  {minWidth: '107px', height: '32px', fontSize: '13px'},
-    md:  {minWidth: '200px', height: '48px', fontSize: '16px'},
-    lg: {minWidth: '320px', height: '72px', fontSize: '20px'}
+    sm: { minWidth: '107px', height: '32px', fontSize: '13px' },
+    md: { minWidth: '200px', height: '48px', fontSize: '16px' },
+    lg: { minWidth: '320px', height: '72px', fontSize: '20px' },
   },
   variants: {
     primary: {
@@ -13,13 +13,13 @@ const Button = {
         bgGradient: 'linear(90deg, primary.400 0%, primary.600 100%)',
         _disabled: {
           background: 'rgba(250, 241, 237, 0.10)',
-        }
+        },
       },
       _disabled: {
         background: 'rgba(250, 241, 237, 0.10)',
-        color: 'rgba(255, 255, 255, 0.5)',
+        color: 'whiteAlpha.500',
         opacity: 1,
-      }
+      },
     },
     secondary: {
       color: 'primary.600',
@@ -29,32 +29,32 @@ const Button = {
         bgGradient: 'linear(90deg, primary.50 0%, primary.200 100%)',
         _disabled: {
           background: '#EAF0F6',
-        }
+        },
       },
       _disabled: {
         background: '#EAF0F6',
-        color: '!gray.500',
+        color: 'gray.500',
         opacity: 1,
         _hover: {
-          bgGradient: 'none'
-        }
-      }
+          bgGradient: 'none',
+        },
+      },
     },
     opacity: {
       color: 'white',
-      backgroundColor: 'rgba(255, 255, 255, 0.1)',
+      backgroundColor: 'whiteAlpha.100',
       borderRadius: 'xs',
       _hover: {
-        bgGradient: 'linear(270deg, #FFFFFF4D 0%, #FFFFFF1A 100%)',
+        bgGradient: 'linear(270deg, whiteAlpha.300 0%, whiteAlpha.100 100%)',
         _disabled: {
-          background: 'rgba(255, 255, 255, .1)'
-        }
+          background: 'whiteAlpha.100',
+        },
       },
       _disabled: {
-        background: 'rgba(255, 255, 255, .1)',
-        color: 'rgba(255, 255, 255, .5)',
-        opacity: 1
-      }
+        background: 'whiteAlpha.100',
+        color: 'whiteAlpha.500',
+        opacity: 1,
+      },
     },
     outline: {
       border: '1px solid',
@@ -63,22 +63,21 @@ const Button = {
       backgroundColor: 'transparent',
       borderRadius: 'xs',
       _hover: {
-        background: 'rgba(255, 255, 255, 0.10)',
-        textOpacity: .9,
+        background: 'whiteAlpha.100',
+        textOpacity: 0.9,
         _disabled: {
           background: 'transparent',
-          color: '#fff',
+          color: 'white',
           textOpacity: 1,
-        }
+        },
       },
       _disabled: {
         background: 'transparent',
-        borderColor: '#fff',
-        color: '#fff',
-        opacity: .5
-      }
+        borderColor: 'white',
+        color: 'white',
+        opacity: 0.5,
+      },
     },
-  }
-
+  },
 }
 export default Button
