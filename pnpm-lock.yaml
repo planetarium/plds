@@ -135,7 +135,9 @@ importers:
 
   packages/theme:
     specifiers:
+      '@chakra-ui/anatomy': ^2.2.2
       '@chakra-ui/react': ^2.8.1
+      '@chakra-ui/theme-tools': ^2.1.2
       '@emotion/react': ^11.11.1
       '@emotion/styled': ^11.11.0
       '@types/react': ^18.2.21
@@ -145,7 +147,9 @@ importers:
       tsconfig: workspace:*
       typescript: ^5.2.2
     dependencies:
+      '@chakra-ui/anatomy': 2.2.2
       '@chakra-ui/react': 2.8.2_gv4imbbscmserrs6ayhzklnxsm
+      '@chakra-ui/theme-tools': 2.1.2_ja4hqwzv3hl2nmvlmsmv4ecani
       '@emotion/react': 11.11.1_qinpt5tsrh57s4kh6guy25fqdq
       '@emotion/styled': 11.11.0_ksuq5na5e72uen54lcvd7upyei
       framer-motion: 10.16.16_biqbaboplfbrettd7655fr4n2y

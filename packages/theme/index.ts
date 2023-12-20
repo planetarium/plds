@@ -10,7 +10,10 @@ const theme = extendTheme({
     useSystemColorMode: false,
   },
   sizes: baseTheme.sizes,
-  space: baseTheme.space,
+  space: {
+    ...baseTheme.space,
+    18: '4.5rem', // 72px
+  },
   direction: baseTheme.direction,
   transition: baseTheme.transition,
   zIndices: baseTheme.zIndices,
