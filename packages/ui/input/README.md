@@ -2,23 +2,14 @@
 
 To use this Input component, follow the same approach as you would with Chakra UI's Input.
 
-**Important notice:**
-
-Please import Input related components directly from `@chakra-ui/react`, not `@plds/ui`.
-
 **Integration:**
 
 Utilize the Input component in your application just like you would with Chakra UI's Input. Place the `<Input>` tag in the desired location within your JSX.
 
 ```tsx
 import React from 'react'
-import {
-  Box,
-  Input,
-  InputGroup,
-  InputLeftElement,
-  Text,
-} from '@chakra-ui/react'
+import { Box, Text } from '@chakra-ui/react'
+import { Input, InputGroup, InputLeftElement } from '@plds/ui'
 
 const YourComponent = () => {
   return (
