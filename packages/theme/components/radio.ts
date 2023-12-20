@@ -8,6 +8,7 @@ const { definePartsStyle, defineMultiStyleConfig } =
 const baseStyle = definePartsStyle({
     // define the part you're going to style
     control: {
+        color: "currentColor",
         border: '1px solid',
         borderColor: mode('gray.300', 'gray.25'),
         background: mode('gray.25', 'transparent'),
