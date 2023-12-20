@@ -1,11 +1,2 @@
-'use client'
-
-import { Box } from '@chakra-ui/react'
-
-export const Button = () => {
-  return (
-    <Box color="primary.600" textStyle="2xl:bold">
-      Test Button
-    </Box>
-  )
-}
+export {Button, ButtonGroup, IconButton, ButtonSpinner, useButtonGroup} from '@chakra-ui/react';
+export type {ButtonProps, ButtonGroupProps, IconButtonProps, ButtonOptions} from '@chakra-ui/react';
