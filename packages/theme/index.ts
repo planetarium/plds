@@ -1,5 +1,6 @@
 import { extendTheme, theme as baseTheme } from '@chakra-ui/react'
 
+import components from './components'
 import foundations from './foundations'
 
 const theme = extendTheme({
@@ -14,6 +15,7 @@ const theme = extendTheme({
   transition: baseTheme.transition,
   zIndices: baseTheme.zIndices,
   ...foundations,
+  components,
 })
 
 export default theme
